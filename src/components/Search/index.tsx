@@ -15,7 +15,7 @@ const SearchDiv: React.FC =()=>{
   return(
     <SearchConteiner>
     <SearchIcon/>
-    <SearchInput  type='text' placeholder='nome,id,assunto'/>
+    <SearchInput  type='text' placeholder='buscar...'/>
     </SearchConteiner>
   )
 }

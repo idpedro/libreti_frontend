@@ -25,14 +25,18 @@ export const SearchConteiner = styled.div`
     align-items:center;
     border: 2px solid var(--gray);
     border-radius:.3em;
-    padding:.3em;
+    overflow:hidden;
     >svg{
         width:2em;
         fill:var(--gray);
         margin-right:.3em;
         transition:.3s;
+    padding:.3em;
+
     }
     &:hover>svg{
-        transform: translateX(-3rem)
+        background:var(--primary);
+        fill:#fff;
+
     }
 `;
