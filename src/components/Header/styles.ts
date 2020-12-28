@@ -29,8 +29,11 @@ export const Logo = styled.div`
   position: relative;
   left: 12px;
   top: 12px;
-  box-shadow: inset 0px 0px 0.2rem black;
-  background: var(--gray);
+  box-shadow:  0px 0px 0.2rem black;
+  background: var(--white);
+  >svg{
+    fill:var(--primary)
+  }
 
   & > :hover {
     animation: ${AnimationRotate} 1s alternate infinite ease-out;

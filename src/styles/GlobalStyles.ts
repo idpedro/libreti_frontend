@@ -5,7 +5,6 @@ export default createGlobalStyle`
     margin:0;
     padding:0;
     box-sizing:border-box;
-    color:var(--white)
   }
   html,body,#root{
     max-height:100vh;
@@ -20,14 +19,16 @@ export default createGlobalStyle`
     background:none;
     font-family:-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-  html{
-    background:var(--gray);
+  svg{
+    color:#fff;
   }
+
   :root{
     --background:#2b2b2b;
-    --primary:#BD34D1;
+    --primary:#6558F5;
     --white:#fff;
     --gray:#788896;
+    --branches:#C54FD7;
   }
 
 `;
