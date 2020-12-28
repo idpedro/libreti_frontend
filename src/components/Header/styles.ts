@@ -29,10 +29,10 @@ export const Logo = styled.div`
   position: relative;
   left: 12px;
   top: 12px;
-  box-shadow:  0px 0px 0.2rem black;
+  box-shadow: 0px 0px 0.2rem black;
   background: var(--white);
-  >svg{
-    fill:var(--primary)
+  > svg {
+    fill: var(--primary);
   }
 
   & > :hover {

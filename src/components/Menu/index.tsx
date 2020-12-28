@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
       </ButtonList>
     );
   }
-  return <></>;
+  return <ButtonList><ButtonLogout /></ButtonList>;
 };
 
 const ButtonConfig: React.FC = () => {
@@ -55,7 +55,7 @@ const ButtonBranches: React.FC = () => {
 };
 const ButtonLogout: React.FC = () => {
   return (
-    <ButtonPreset background="#D3455C">
+    <ButtonPreset background="#D3455C" >
       <Exit />
     </ButtonPreset>
   );

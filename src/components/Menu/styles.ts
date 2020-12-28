@@ -5,8 +5,12 @@ export const ButtonList = styled.div`
   padding: 0.5rem;
   height: 100%;
   width: min(60vw, 500px);
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  &>:last-child(){
+    align-self:flex-end
+
+  }
 `;
 
 interface MenuLinkProps {
