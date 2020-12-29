@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Logo, SupportImage } from './styles';
-import Menu from '../Menu';
+import Menu  from './Menu';
 
-const Header: React.FC = () => {
+const NavBar: React.FC = () => {
   return (
     <>
       <Container>
@@ -15,4 +15,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default NavBar;

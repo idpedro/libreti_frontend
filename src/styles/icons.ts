@@ -5,7 +5,9 @@ export {
   SupportAgent,
   Settings,
   ExitToApp as Exit,
-  Search
+  Search,
+  FilterAlt as Filter,
+  Group
 } from 'styled-icons/material-outlined';
-export { ArrowLeft } from 'styled-icons/heroicons-solid';
+export { ArrowLeft,OfficeBuilding } from 'styled-icons/heroicons-solid';
 export { User } from 'styled-icons/heroicons-outline';
