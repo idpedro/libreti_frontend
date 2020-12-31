@@ -1,13 +1,14 @@
 import React from 'react';
-import { CardWrapper, Header, Title, Description,Status } from './styles';
+import { CardWrapper, Header, Title, Description, Status } from './styles';
 
 export interface OSCardInterface {
   id: number;
-  nameClient: String;
-  title: string;
+  subject: string;
   description: string;
   priority: string;
   status: string;
+  client: String;
+  technical?: string;
 }
 
 const OSCard: React.FC<OSCardInterface> = (props) => {
@@ -15,16 +16,17 @@ const OSCard: React.FC<OSCardInterface> = (props) => {
     <>
       <CardWrapper priority={props.priority}>
         <Header>
-          <span>{props.title}</span>
+          <span>{props.subject}</span>
           <span>{'#' + props.id}</span>
         </Header>
-        <Title>{props.title}</Title>
+        <h3>{props.client}</h3>
+        <Title>{props.subject}</Title>
         <Description>
           {props.description.substr(0, 100).trim() + '...'}
         </Description>
         <Status>
           <span>{props.status}</span>
-          <span>{props.status}</span>
+          {props.technical ? <span>Técnico {props.technical}</span> : <></>}
         </Status>
       </CardWrapper>
     </>

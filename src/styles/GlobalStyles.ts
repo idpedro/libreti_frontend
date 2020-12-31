@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const Colors = {
-  primary: '#6558F5',
+  primary: '#3f51b5',
   info: '#2C88D9',
   success: '#34d19d',
   danger: '#d81a39',
@@ -9,6 +9,21 @@ export const Colors = {
 };
 
 export default createGlobalStyle`
+
+  :root{
+    --primary:${(props) => props.theme.colors.primary};
+    --secundary:${(props) => props.theme.colors.secundary};
+    --highlight:${(props) => props.theme.colors.highlight};
+    --shadow:${(props) => props.theme.colors.shadow};
+    --info:${(props) => props.theme.colors.logColors.info};
+    --danger:${(props) => props.theme.colors.logColors.danger};
+    --confirm:${(props) => props.theme.colors.logColors.success};
+    --warning:${(props) => props.theme.colors.logColors.warning};
+    --text:${(props) => props.theme.colors.text};
+    --textDark:${(props) => props.theme.colors.textDark};
+    --textButtons:${(props) => props.theme.colors.textButtons}
+  }
+
   *{
     margin:0;
     padding:0;
@@ -27,6 +42,8 @@ export default createGlobalStyle`
     overflow:auto;
     scroll-snap-type:y mandatory;
     scroll-behavior:smooth;
+    background:${(props) => props.theme.colors.background};
+    color:${(props) => props.theme.colors.text};
 
   }
   #root::-webkit-scrollbar {
@@ -39,8 +56,8 @@ export default createGlobalStyle`
   }
 
   #root::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    outline: 1px solid var(--primary);
+    background-color: ${(props) => props.theme.colors.primary};
+    outline: 1px solid  ${(props) => props.theme.colors.primary} ;
   }
   #root::-webkit-scrollbar-track{
     box-shadow:none;
@@ -54,20 +71,10 @@ export default createGlobalStyle`
     color:#fff;
   }
 
-  :root{
-    --background:#2b2b2b;
-    --button-default:${Colors.buttonDefault};
-    --primary:${Colors.primary};
-    --white:#fff;
-    --gray:#788896;
-    --branches:#C54FD7;
-    --info:${Colors.info};
-    --danger:${Colors.danger};
-    --confirm:${Colors.success};
-    --warning:#F7C325;
-    --text:#564d4d;
-    --text-dark:#484848;
-    --text-white:#fcfcfc;
+
+ *::selection{
+    background-color:var(--primary);
+    color:var(--text)
   }
 
 `;

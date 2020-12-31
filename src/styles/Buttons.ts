@@ -9,21 +9,20 @@ interface ButtonInterface {
 const ButtonPreset = css<ButtonInterface>`
   display: flex;
   align-items: center;
-  background: ${(props) => (props.background ? props.background : 'var(--button-default)')};
+  background: var(--primary);
   font-weight: bolder;
   font-size:.8em;
   padding: 0.5rem;
   border-radius: 0.3rem;
   text-align: center;
-
+  color: var(--textButtons);
   text-decoration:none;
-  > span {
-    color: ${(props) => (props.color ? props.color : '#fff')};
-  }
   > svg {
     width: max(24px, 1.5rem);
     height: max(24px, 1.5rem);
-    fill: ${(props) => (props.color ? props.color : '#fff')};
+    fill: var(--textButtons);
+    color: var(--textButtons);
+
   }
   > svg + span {
     margin-left: 0.3rem;
@@ -33,8 +32,7 @@ const ButtonPreset = css<ButtonInterface>`
   }
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 1rem
-      ${(props) => (props.background ? props.background : '#fff')};
+    box-shadow: 0px 0px 1rem var(--shadow);
   }
   &:active{
     outline:none;
@@ -43,8 +41,8 @@ const ButtonPreset = css<ButtonInterface>`
   @media(max-width:900px){
     font-size:.8rem;
     &>svg{
-      width:1.3rem;
-      height:1.3rem;
+      width:1rem;
+      height:1rem;
     }
   }
   @media(max-width:520px){

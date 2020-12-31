@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Button } from '../../styles/Buttons';
-export { Filter } from '../../styles/icons';
+import { Button } from '../../../styles/Buttons';
+export { Filter } from '../../../styles/icons';
 
 export const Container = styled.div`
   margin-top: 15vh;
@@ -18,7 +18,7 @@ export const SearchConteiner = styled.div`
   background: var(--primary);
   border-radius: 0.3rem;
   overflow: hidden;
-  color: var(--white);
+  color: var(--textButtons);
   > svg {
     width: 100%;
     margin: 0.3rem;
@@ -26,7 +26,7 @@ export const SearchConteiner = styled.div`
     max-height: 2rem;
     fill: var(--gray);
     transition: 0.3s;
-    fill: #fff;
+    fill: var(--textButtons);
   }
   &:hover > svg {
   }
@@ -41,29 +41,22 @@ export const SearchInput = styled.input`
   font-size: 1em;
   padding: 0.25em;
   outline: none;
-  color: #fff;
+  color: var(--textButtons);
   width: min(400px, 100%);
-  &:active,
-  &:focus {
+  :active,
+  :focus {
     outline: none;
   }
-  &::placeholder {
-    color: #fff;
+  ::placeholder {
+    color: var(--textButtons);
   }
-  &::after {
-    content: '';
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    background: red;
-    z-index: 2;
-  }
+ 
 `;
 
 export const FilterButton = styled(Button)`
   background-color: var(--primary);
-  color: var(--white);
-  & > svg {
-    fill: var(--white);
+  color: var(--textButtons);
+  > svg {
+    fill: var(--textButtons);
   }
 `;
