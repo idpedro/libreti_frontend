@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Button } from '../../styles/Buttons';
+
+
 export { Filter } from '../../styles/icons';
 
 export const Container = styled.div`
@@ -22,12 +23,4 @@ export const ToolBar = styled.div`
   justify-content: space-between;
   padding: 0 5vw;
   width: 100%;
-`;
-
-export const FilterButton = styled(Button)`
-  background-color: var(--primary);
-  color: var(--textButtons);
-  > svg {
-    fill: var(--textButtons);
-  }
 `;

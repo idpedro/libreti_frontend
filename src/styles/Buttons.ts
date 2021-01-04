@@ -35,8 +35,10 @@ const ButtonPreset = css<ButtonInterface>`
     box-shadow: 0px 0px 1rem var(--shadow);
   }
   &:active{
-    outline:none;
     border:none;
+  }
+  :active,:hover,:focus{
+      outline:none;
   }
   @media(max-width:900px){
     font-size:.8rem;

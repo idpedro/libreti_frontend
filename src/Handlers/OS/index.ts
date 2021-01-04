@@ -28,4 +28,10 @@ const sortByPriority = (a: OSCardInterface, b: OSCardInterface) => {
   return 0;
 };
 
-export { sortByPriority, sortById, sortAlphaByName };
+const SortOptions=["prioridade","nome","id"]
+const Sort={
+  prioridade:sortByPriority,
+  nome:sortAlphaByName,
+  id:sortById
+}
+export {Sort , SortOptions};
