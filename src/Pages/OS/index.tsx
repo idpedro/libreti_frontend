@@ -9,7 +9,7 @@ import {
   Filter,
 } from './styles';
 
-import { TabList,Tab} from '../../components/Tab';
+import { Tab,TabNav} from '../../components/Tab';
 
 import OSCard, { OSCardInterface } from './OsCard';
 import { sortByPriority} from '../../Handlers/OS';
@@ -54,10 +54,9 @@ const Os: React.FC = () => {
   useEffect(() => {
     const getOsList = async () => {
       const response = await fetch(
-        'http://10.1.1.74:3333/os/get/status/assumed'
+        'http://localhost:3333/os/get/status/assumed'
       );
       const data = await response.json();
-      console.log(data);
       setOsAssumed(data);
     };
     getOsList();
@@ -65,7 +64,7 @@ const Os: React.FC = () => {
 
   useEffect(() => {
     const getOsList = async () => {
-      const response = await fetch('http://10.1.1.74:3333/os/get/status/open');
+      const response = await fetch('http://localhost:3333/os/get/status/open');
       const data = await response.json();
       setOsOpen(data);
       setDisplayedOSList(data);
@@ -88,10 +87,17 @@ const Os: React.FC = () => {
           <span>{'Filtrar'}</span>
         </FilterButton>
       </ToolBar>
-      <TabList>
-        <button>ok</button>
-      </TabList>
-      <OsListOpen osList={displayedOSList as OSCardInterface[]} />
+      <Tab>
+        <TabNav title="Abertas" >
+          {/* <OsListOpen osList={osOpen as OSCardInterface[]} /> */}
+          <h1>os</h1>
+        </TabNav>
+        <TabNav title="Assumidas">
+          {/* <OsListOpen osList={osAssumed as OSCardInterface[]} /> */}
+          <h1>os2</h1>
+        </TabNav>
+      </Tab>
+      
     </>
   );
 };

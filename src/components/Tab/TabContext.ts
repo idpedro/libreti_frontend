@@ -1,10 +1,26 @@
-import { createContext } from 'react';
+import { createContext,ReactElement } from 'react';
 
-interface ITabContext {
-  createContext?: (any:any)=>void;
+export interface InterfaceTab{
+  title:string
+  tabRef:React.FC,
+  setState:Function
+  children:JSX.Element
+}
+export interface ITab{
+  title:string,
+  setState:(state:boolean)=>void
+  content:JSX.Element
 }
 
-const TabContext = createContext<ITabContext>({});
+
+export interface InterfaceTabContext{
+  addTab?:(ITab:ITab)=>void
+}
+
+type  TypeTabContext = InterfaceTabContext | null;
+
+
+const TabContext = createContext<InterfaceTabContext>({})
 
 
 

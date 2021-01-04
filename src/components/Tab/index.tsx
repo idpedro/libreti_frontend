@@ -1,31 +1,60 @@
-import React, { useCallback,useState,useContext } from 'react';
-import { TabHeader,Tab as TabButton } from './styles';
-import TabContext from './TabContext';
+import React, { useCallback,useState } from 'react';
+import TabContext ,{ITab} from './TabContext';
+import { TabContent } from './styles';
+import TabNav from './TabNav';
 
 
-const TabList: React.FC = ({children}) => {
-  const  changeContent = useCallback(() => {
+const Tab: React.FC = ({children}) => {
+  const [content,setContent ] = useState<ITab[]|null>(null);
+  const [tabList,setTabList ] = useState<ITab[]|undefined>([]);
+
+  const asOnList=(tab:ITab,list:ITab[]): [boolean,number] => {
+    let onlist=false;
+    let count = 0;
+    while((count<list!.length)){
+      if(list[count]){
+        if(list[count].title === tab.title){ 
+          return [true,count]
+        }
+      }
+      count++ 
+    }
+    return [onlist, count]
+  }
+
+  const addTab = useCallback((tab:ITab)=>{
+
+    setTabList((oldTab)=>{
+      if(oldTab){
+        const newTabList = [...oldTab]
+        if(newTabList.length>1 ){
+          const [onList, index] = asOnList(tab,oldTab);
+          if (onList){ 
+            newTabList[index] = tab;
+            return newTabList}
+          else return  [...newTabList,tab]
+        }else {
+          return [...oldTab,tab]
+        }
+      }
+    });
+    
   },[])
+
+  // useEffect(()=>{console.log(tabList)},[tabList])
   return (
-    <TabContext.Provider value={{changeContent}}>
-      <TabHeader>
-          {children}
-     </TabHeader>
+     <TabContent>
+    <TabContext.Provider value={{addTab}}>
+        {children}
     </TabContext.Provider>
+      <div>
+        {content}
+      </div>
+     </TabContent>
   );
 };
 
-const Tab:React.FC =()=>{
-    const { changeContent } = useContext(TabContext); 
-    const [ state, setState] = useState("");
-    const handlerClick =()=>{
-      
-    }
-    return(
-        <TabButton onClick={handlerClick}/>
-    )
-}
 
 
 
-export { TabList ,Tab};
+export { TabNav ,Tab};
