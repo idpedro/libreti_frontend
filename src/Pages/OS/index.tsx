@@ -1,5 +1,6 @@
-import React, { useState, useEffect, ReactNode } from 'react';
-import Search from './Search';
+import React, { useState, useEffect, ReactNode, useCallback } from 'react';
+import Api from '../../Api';
+import Search from '../../components/Search';
 import NavBar from '../../components/NavBar';
 import { Container, ToolBar } from './styles';
 import Filter from '../../components/Filter';
@@ -30,50 +31,41 @@ const Os: React.FC = () => {
   const [osOpen, setOsOpen] = useState<OSCardInterface[]>([]);
   const [osAssumed, setOsAssumed] = useState<OSCardInterface[]>([]);
 
-  const [showOS, setShowOS] = useState('Abertas');
+  const [showOS, setShowOS] = useState<'open' | 'assumed'>('open');
 
-  useEffect(() => {
-    const getOsList = async () => {
-      const response = await fetch(
-        'http://localhost:3333/os/get/status/assumed'
-      );
-      const data = await response.json();
-      setOsAssumed(data);
-    };
-    getOsList();
+  const getOsOpen = useCallback(async () => {
+    const { data } = await Api.get('os/get/status/open');
+    setOsOpen(data);
+  }, []);
+
+  const getOsAssumed = useCallback(async () => {
+    const { data } = await Api.get('os/get/status/assumed');
+    setOsAssumed(data);
   }, []);
 
   useEffect(() => {
-    const getOsList = async () => {
-      const response = await fetch('http://localhost:3333/os/get/status/open');
-      const data = await response.json();
-      setOsOpen(data);
-    };
-    getOsList();
-  }, []);
+    getOsOpen();
+    getOsAssumed();
+  }, [getOsOpen, getOsAssumed]);
 
   const sortOsList = (sortBy: 'prioridade' | 'id' | 'nome') => {
-    console.log(sortBy);
-    if (showOS) {
-      if (showOS === 'Abertas') setOsOpen([...osOpen].sort(Sort[sortBy]));
-      if (showOS === 'Assumidas')
-        setOsAssumed([...osAssumed].sort(Sort[sortBy]));
-    }
+    if (showOS === 'open') setOsOpen([...osOpen].sort(Sort[sortBy]));
+    else setOsAssumed([...osAssumed].sort(Sort[sortBy]));
   };
+
   return (
     <>
       <NavBar />
-      <Search />
       <ToolBar>
         <Search />
         <Filter filterCallback={sortOsList} options={SortOptions} />
       </ToolBar>
       <Tab handlerContentCallback={setShowOS}>
-        <TabNav active={true} title="Abertas">
-          <OsListOpen osList={osOpen as OSCardInterface[]} />
+        <TabNav active={true} name="Abertas" title="open">
+          <OsListOpen osList={osOpen} />
         </TabNav>
-        <TabNav title="Assumidas">
-          <OsListOpen osList={osAssumed as OSCardInterface[]} />
+        <TabNav name="Assumidas" title="assumed">
+          <OsListOpen osList={osAssumed} />
         </TabNav>
       </Tab>
     </>

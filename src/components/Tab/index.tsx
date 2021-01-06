@@ -5,7 +5,7 @@ import TabNav from './TabNav';
 
 export interface ITabProps{
   children:JSX.Element[]|JSX.Element,
-  handlerContentCallback:(tab:string)=>void
+  handlerContentCallback:(tab:any)=>void
 }
 
 const Tab: React.FC<ITabProps> = ({ children,handlerContentCallback }) => {

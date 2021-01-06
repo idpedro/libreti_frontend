@@ -4,11 +4,12 @@ import TabContext from '../TabContext';
 
 interface ITabNav {
   children: JSX.Element;
+  name:string
   title: string;
   active?: boolean;
 }
 
-const TabNav: React.FC<ITabNav> = ({ children, title, active }) => {
+const TabNav: React.FC<ITabNav> = ({ children, name,title, active }) => {
   const tabRef = useRef<HTMLButtonElement>(null);
   const { addTab, changeContent } = useContext(TabContext);
   const [state, setState] = useState(false);
@@ -29,7 +30,7 @@ const TabNav: React.FC<ITabNav> = ({ children, title, active }) => {
   }, [addTab, children, title, setState, active]);
   return (
     <Button active={state} onClick={click} ref={tabRef}>
-      {title}
+      {name}
     </Button>
   );
 };

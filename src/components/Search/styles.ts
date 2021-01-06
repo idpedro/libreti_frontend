@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Button } from '../../../styles/Buttons';
-export { Filter } from '../../../styles/icons';
+import { Button } from '../../styles/Buttons';
+export { Filter } from '../../styles/icons';
 
 export const Container = styled.div`
   margin-top: 15vh;
