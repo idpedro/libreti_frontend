@@ -18,3 +18,10 @@ export const Button = styled.button<ITab>`
   border-radius: 0.3rem 0.3rem 0em 0em;
   color: var(--text);
 `;
+
+export const Container = styled.div`
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+`

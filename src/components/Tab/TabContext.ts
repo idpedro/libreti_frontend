@@ -18,7 +18,7 @@ export interface ITabNav {
   title: string;
   state: boolean;
   setState: Dispatch<any>;
-  content: JSX.Element;
+  content: Element | Element[];
 }
 
 export interface InterfaceTabContext {

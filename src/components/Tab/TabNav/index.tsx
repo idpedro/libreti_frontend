@@ -1,37 +1,54 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import { Button } from './styled';
 import TabContext from '../TabContext';
 
 interface ITabNav {
-  children: JSX.Element;
-  name:string
+  children: JSX.Element[] | JSX.Element;
+  name: string;
   title: string;
   active?: boolean;
 }
 
-const TabNav: React.FC<ITabNav> = ({ children, name,title, active }) => {
+export interface TabHandler {
+  getConter: () => JSX.Element;
+}
+
+const TabNav: React.FC<ITabNav> = ({ children, name, title, active }) => {
   const tabRef = useRef<HTMLButtonElement>(null);
   const { addTab, changeContent } = useContext(TabContext);
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(active ? active : false);
 
   const click = () => {
-    changeContent(title);
+    changeContent(title, children);
   };
+  const toggleState = useCallback((state: boolean) => {
+    setState(state);
+  }, []);
+
+  const registreTab = useCallback(() => {
+    addTab({
+      title,
+      state,
+      setState:toggleState,
+      content:children,
+    });
+  }, [addTab, children, state, title, toggleState]);
+
   useEffect(() => {
-    active && setState(active);
-    addTab &&
-      addTab({
-        title,
-        state,
-        setState,
-        content: children,
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addTab, children, title, setState, active]);
+    registreTab();
+  }, [registreTab]);
   return (
-    <Button active={state} onClick={click} ref={tabRef}>
-      {name}
-    </Button>
+    <>
+      <Button active={state} onClick={click} ref={tabRef}>
+        {name}
+      </Button>
+    </>
   );
 };
 

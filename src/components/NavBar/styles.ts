@@ -3,8 +3,8 @@ import { SupportAgent } from '../../styles/icons';
 import {shade} from 'polished';
 
 export const Container = styled.div`
-  position:fixed;
   display: flex;
+  margin-bottom:5vh;
   flex-wrap: nowrap;
   justify-content: center;
   align-items:center;

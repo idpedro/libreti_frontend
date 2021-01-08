@@ -28,8 +28,8 @@ const OsListOpen: React.FC<IOsListOpen> = ({ osList }: IOsListOpen) => {
 };
 
 const Os: React.FC = () => {
-  const [osOpen, setOsOpen] = useState<OSCardInterface[]>([]);
-  const [osAssumed, setOsAssumed] = useState<OSCardInterface[]>([]);
+  const [osOpen, setOsOpen] = useState<OSCardInterface[]>();
+  const [osAssumed, setOsAssumed] = useState<OSCardInterface[]>();
 
   const [showOS, setShowOS] = useState<'open' | 'assumed'>('open');
 
@@ -48,9 +48,10 @@ const Os: React.FC = () => {
     getOsAssumed();
   }, [getOsOpen, getOsAssumed]);
 
+
   const sortOsList = (sortBy: 'prioridade' | 'id' | 'nome') => {
-    if (showOS === 'open') setOsOpen([...osOpen].sort(Sort[sortBy]));
-    else setOsAssumed([...osAssumed].sort(Sort[sortBy]));
+    if (showOS === 'open') osOpen && setOsOpen([...osOpen].sort(Sort[sortBy]));
+    else osAssumed && setOsAssumed([...osAssumed].sort(Sort[sortBy]));
   };
 
   return (
@@ -62,10 +63,14 @@ const Os: React.FC = () => {
       </ToolBar>
       <Tab handlerContentCallback={setShowOS}>
         <TabNav active={true} name="Abertas" title="open">
-          <OsListOpen osList={osOpen} />
+         {
+          osOpen ?  <OsListOpen osList={osOpen} />: <h1>Caregando Os Aberta</h1>
+         }
         </TabNav>
         <TabNav name="Assumidas" title="assumed">
-          <OsListOpen osList={osAssumed} />
+         {
+            osAssumed ? <OsListOpen osList={osAssumed} /> : <h1>Caregando Os Aberta</h1>
+         }
         </TabNav>
       </Tab>
     </>

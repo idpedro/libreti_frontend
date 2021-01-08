@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { CardWrapper, Header, Title, Description, Status } from './styles';
 
 export interface OSCardInterface {
@@ -33,4 +33,4 @@ const OSCard: React.FC<OSCardInterface> = (props) => {
   );
 };
 
-export default OSCard;
+export default memo(OSCard);
