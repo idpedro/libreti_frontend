@@ -9,16 +9,16 @@ import { Label } from './styles';
 interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const Toggle: React.ForwardRefRenderFunction<HTMLInputElement, ToggleProps> = (
-  props,
+  { checked, ...props },
   ref
 ) => {
-  const [state, setState] = useState<boolean>(false);
+  const [state, setState] = useState<boolean>(checked ? true : false);
   const toggleState = useCallback(() => {
     setState(!state);
   }, [state, setState]);
   return (
-    <Label onClick={toggleState}>
-      <input ref={ref} type="checkbox" name="" id="" defaultChecked={state} />
+    <Label onClick={toggleState} data-state={state}>
+      <input ref={ref} type="checkbox" defaultChecked={state} {...props} />
       <span></span>
     </Label>
   );

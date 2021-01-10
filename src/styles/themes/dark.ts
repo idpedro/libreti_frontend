@@ -10,7 +10,7 @@ export default {
     background: '#0D1321',
     background_light: '#1D2D44',
     text: '#fcfcfc',
-    textButtons:'#fcfcfc',
+    textButtons: '#fcfcfc',
     textDark: '#484848',
     logColors: {
       success: '#34d19d',

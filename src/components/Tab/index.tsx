@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import TabContext, { ITabNav } from './TabContext';
 import { TabContent, TabNavBar } from './styles';
 import TabNav from './TabNav';
@@ -35,9 +35,6 @@ const Tab: React.FC<ITabProps> = ({ children, handlerContentCallback }) => {
     });
   };
 
-  useEffect(() => {
-    console.log('change render TABMain');
-  }, []);
   const changeContent = useCallback(
     (title: string) => {
       if (Object.keys(tabList).length > 0) {
@@ -53,9 +50,6 @@ const Tab: React.FC<ITabProps> = ({ children, handlerContentCallback }) => {
     [handlerContentCallback, tabList]
   );
 
-  useEffect(() => {
-    console.log(tabList);
-  }, [tabList]);
   return (
     <>
       <TabNavBar>

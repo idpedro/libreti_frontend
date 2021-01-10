@@ -2,64 +2,46 @@ import React, {
   useState,
   useContext,
   useCallback,
-  MouseEvent,
+  useEffect,
+  useRef,
 } from 'react';
 import { APPContext, ThemeToggle } from '../../App';
 import NavBar from '../../components/NavBar';
-import { Container, ThemesContent, ThemeButton } from './styles';
-import { Tab, TabNav } from '../../components/Tab';
+import { Container, Label, InputWrapper } from './styles';
 
-interface IThemeComponent {
-  themes: {};
-  usedTheme:string;
-  handlerClick: (name:ThemeToggle)=>void;
-}
-
-const ThemeComponent: React.FC<IThemeComponent> = ({
-  usedTheme,
-  themes,
-  handlerClick,
-}) => {
-  const [useTheme, setUseTheme] = useState<string>((usedTheme as string));
-    const changeTheme = (event: MouseEvent<HTMLButtonElement>)=>{
-        setUseTheme((event.currentTarget.getAttribute('data-theme') as string))
-        handlerClick((event.currentTarget.getAttribute('data-theme') as ThemeToggle))
-    }
-    return <>
-        {Object.keys(themes).map((themeName) => (
-            <ThemesContent key={themeName}>
-                <h4>{themeName}</h4>
-                <ThemeButton onClick={changeTheme} data-theme={themeName}>
-                    Ativar
-                </ThemeButton>
-                {useTheme === themeName && <span>Ativo</span>}
-            </ThemesContent>
-        ))}
-    </>;
-};
+import Select from '../../components/Select';
 
 const Config: React.FC = () => {
+  const { themes, usedTheme, toggleTheme } = useContext(APPContext);
 
-  const { themes, theme, toggleTheme } = useContext(APPContext);
+  const selectedTheme = useRef<HTMLSelectElement>(null);
 
-  const handlerClick = useCallback((name:ThemeToggle):void => {
-    toggleTheme(name);
+  const changeTheme = useCallback(() => {
+    toggleTheme(selectedTheme.current?.value as ThemeToggle);
   }, [toggleTheme]);
-
 
   return (
     <>
       <NavBar />
       <Container>
-        <Tab>
-          <TabNav name="Usúario" title="user" active={true}>
-            <h1>Teste</h1>
-          </TabNav>
-          <TabNav name="Tema" title="thema">
-            <ThemeComponent usedTheme={(theme.name as string)} themes={themes} handlerClick={handlerClick}>
-            </ThemeComponent>
-          </TabNav>
-        </Tab>
+        <form action="">
+          <InputWrapper>
+            <label htmlFor="">nome</label>
+            <input type="text" />
+          </InputWrapper>
+        </form>
+        <h4>Configurações de Interface</h4>
+        <Container>
+          <Label>
+            Tema
+            <Select
+              optionlist={themes}
+              selectedOption={usedTheme}
+              ref={selectedTheme}
+              onChange={changeTheme}
+            />
+          </Label>
+        </Container>
       </Container>
     </>
   );

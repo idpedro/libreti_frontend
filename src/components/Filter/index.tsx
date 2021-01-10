@@ -9,7 +9,9 @@ interface InterfaceFilter {
 
 const Filter: React.FC<InterfaceFilter> = ({ options, filterCallback }) => {
   const [selectedOption, setSelectedOption] = useState<string>(options[1]);
-  const filterCall = useCallback(() => { filterCallback(selectedOption) },[filterCallback, selectedOption]);
+  const filterCall = useCallback(() => {
+    filterCallback(selectedOption);
+  }, [filterCallback, selectedOption]);
   return (
     <Container>
       <FilterButton onClick={filterCall}>

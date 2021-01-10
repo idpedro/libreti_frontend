@@ -1,49 +1,44 @@
-import React, { useState, createContext, useCallback, useEffect } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 import GlobalStyles from './styles/GlobalStyles';
 import Routes from './Router';
 import themes from './styles/themes';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 export type ThemeToggle = 'dark' | 'dracula';
 
 interface IAPPContext {
-  themes: {};
-  theme: { name?: string; theme?: DefaultTheme | null };
+  themes: string[];
+  usedTheme: string | undefined;
   toggleTheme: (name: ThemeToggle) => void;
 }
 export const APPContext = createContext<IAPPContext>({
-  themes: {},
-  theme: {},
+  themes: [],
+  usedTheme: undefined,
   toggleTheme: () => {},
 });
 
 function App() {
-  const [theme, setTheme] = useState({
-    name: localStorage.getItem('theme')
+  const [usedTheme, setTheme] = useState(
+    localStorage.getItem('theme')
       ? (localStorage.getItem('theme') as ThemeToggle)
-      : 'dark',
-    theme: themes[ localStorage.getItem('theme')?(localStorage.getItem('theme') as ThemeToggle): 'dark' ]
-  });
+      : 'dark'
+  );
 
   const toggleTheme = useCallback(
     (name: ThemeToggle) => {
-      if (!(theme.name === name)) {
+      if (!(usedTheme === name)) {
         localStorage.setItem('theme', name);
-        setTheme({ name, theme: themes[name] });
+        setTheme(name);
       }
     },
-    [theme.name]
+    [usedTheme]
   );
-  useEffect(() => {
-    if (localStorage.getItem('theme')) {
-      toggleTheme(localStorage.getItem('theme') as ThemeToggle);
-    } else {
-      localStorage.setItem('theme', theme.name);
-    }
-  });
+
   return (
-    <APPContext.Provider value={{ themes, theme, toggleTheme }}>
-      <ThemeProvider theme={theme.theme}>
+    <APPContext.Provider
+      value={{ themes: Object.keys(themes), usedTheme, toggleTheme }}
+    >
+      <ThemeProvider theme={themes[usedTheme]}>
         <GlobalStyles />
         <Routes />
       </ThemeProvider>
